@@ -1,0 +1,40 @@
+.top {
+    margin-bottom: 100px;
+}
+
+table {
+    margin: auto;
+    width: 75%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+button {
+    padding: 6px;
+    margin: 6px;
+    width: 60px;
+    height: 30px;
+}
+
+.add-btn button{
+    margin-top: 50px;
+    background: rgb(51, 103, 248);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 70px;
+}
+
+.forms {
+    margin-top: 50px;
+}
+
+.forms input {
+    margin: 4px;
+    border: 1px solid #ddd;
+}

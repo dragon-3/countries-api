@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import {useState} from 'react'
+import {useState} from 'react';
+import {Link} from 'react-router-dom'
 import './CountryList.css'
+import Edit from './Edit';
 
 function CountryList() {
 
@@ -39,7 +41,18 @@ function CountryList() {
                 area: values.area
             })
         })
+        .then(() => {
+            setValues({name: "", language: "", area: ""})
+        })
+        
+
     }
+
+    const deleteCountry = (id) => {
+        fetch(url + `${id}`, {
+            method: "DELETE"
+        })
+    } 
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -72,8 +85,8 @@ function CountryList() {
                                     <td>{countries.language}</td>
                                     <td>{countries.area}</td>
                                     <td>
-                                        <button>Edit</button>
-                                        <button>Delete</button>
+                                        <Link to={`${countries.id}`}><button>Edit</button></Link>
+                                        <button onClick={() => deleteCountry(countries.id)}>Delete</button>
                                     </td>
                                 </tr>
                                 
@@ -86,11 +99,11 @@ function CountryList() {
                 <div className="forms">
                     <form action="">
                         <label htmlFor="">Name:</label>
-                        <input type="text" name='name' onChange={handleChange}/><br />
+                        <input type="text" name='name' onChange={handleChange} value={values.name}/><br />
                         <label htmlFor="">Lang:</label>
-                        <input type="text" name='language' onChange={handleChange} /><br />
+                        <input type="text" name='language' onChange={handleChange} value={values.language}/><br />
                         <label htmlFor="">Area:</label>
-                        <input type="text" name='area' onChange={handleChange} /><br />
+                        <input type="text" name='area' onChange={handleChange} value={values.area}/><br />
                     </form>
                 </div>
                 

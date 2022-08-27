@@ -30,7 +30,7 @@ function CountryList() {
     }
 
     const addCountry = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         
         fetch(url, {
             method: "POST",
@@ -46,6 +46,15 @@ function CountryList() {
         })
         
 
+    }
+
+    const handleKeyPress = (e) => {
+        
+        if(e.key == "Enter") {
+            addCountry();
+
+        }
+        
     }
 
     const deleteCountry = (id) => {
@@ -97,7 +106,7 @@ function CountryList() {
                 </table>
 
                 <div className="forms">
-                    <form action="">
+                    <form action="" onKeyPress={handleKeyPress}>
                         <label htmlFor="">Name:</label>
                         <input type="text" name='name' onChange={handleChange} value={values.name}/><br />
                         <label htmlFor="">Lang:</label>

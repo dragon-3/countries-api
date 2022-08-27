@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {useParams} from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router-dom';
 import "./Edit.css"
 import CountryList from "./CountryList";
 import axios from "axios";
@@ -14,6 +14,7 @@ function Edit() {
         language: '',
         area: ''
     })
+    const navigate = useNavigate();
 
     useEffect(() => {
         getData();
@@ -28,22 +29,27 @@ function Edit() {
             setData(data), 
             setValues({name: data.name, language: data.language, area: data.area}))
         )
-
-        // axios.get(url + `${id}`)
-        // .then(response => (
-        //     setData(response.data),
-        //     setValues({
-        //         name: response.data.name,
-        //         language: response.data.language,
-        //         area: response.data.area,
-        //     })
-        // ))
     }
 
     const handleChange = (event) => {
         event.preventDefault();
         setValues({
             ...values, [event.target.name]: event.target.value
+        })
+    }
+
+    const update = () => {
+        fetch(url + `${id}`, {
+            method: "PUT",
+            headers:{'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: values.name,
+                language: values.language,
+                area: values.area
+            })
+        })
+        .then(() => {
+            navigate("/")
         })
     }
 
@@ -61,7 +67,7 @@ function Edit() {
                     <input type="text" onChange={handleChange} name="area" value={values.area}/>
                 </form>
                 
-                <button>Update</button>
+                <button onClick={update}>Update</button>
             </div>
             
         </div>
